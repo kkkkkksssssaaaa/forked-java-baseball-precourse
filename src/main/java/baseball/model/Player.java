@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
 
-public class  Player extends Number {
+public class Player extends PlayerTemplate {
 
     private final List<Integer> numbers = new ArrayList<>();
 
@@ -13,6 +13,7 @@ public class  Player extends Number {
         numbers.addAll(initializeNumbers(consoleInput));
     }
 
+    @Override
     public List<Integer> getNumbers() { return this.numbers; }
 
     private List<Integer> initializeNumbers(String consoleInput) {
@@ -49,7 +50,7 @@ public class  Player extends Number {
     private List<Integer> checkSizeAfterReturn(List<Integer> input) {
         Set<Integer> toSet = new HashSet<>(checkValidValueAfterReturn(input));
 
-        if (toSet.size() == 3) {
+        if (toSet.size() == size) {
             return input;
         }
 

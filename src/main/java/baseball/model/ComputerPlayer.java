@@ -4,14 +4,15 @@ import nextstep.utils.Randoms;
 
 import java.util.*;
 
-public class ComputerPlayer extends Number {
+public class ComputerPlayer extends PlayerTemplate {
 
     private final List<Integer> numbers = new ArrayList<>();
 
-    public ComputerPlayer () {
+    public ComputerPlayer() {
         numbers.addAll(initializeNumbers());
     }
 
+    @Override
     public List<Integer> getNumbers() {
         return this.numbers;
     }
@@ -19,8 +20,8 @@ public class ComputerPlayer extends Number {
     private Set<Integer> initializeNumbers() {
         Set<Integer> createNumbers = new HashSet<Integer>();
 
-        while(createNumbers.size() < super.size) {
-            createNumbers.add(Randoms.pickNumberInRange(super.startIdx, super.endIdx));
+        while(createNumbers.size() < size) {
+            createNumbers.add(Randoms.pickNumberInRange(startIdx, endIdx));
         }
 
         return createNumbers;
