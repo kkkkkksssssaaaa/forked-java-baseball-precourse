@@ -11,7 +11,7 @@ class ComputerPlayerTest {
         int testCount = 1000;
 
         for (int i = 0; i < testCount; i++) {
-            PlayerTemplate number = new ComputerPlayer();
+            ComputerPlayer number = new ComputerPlayer();
 
             assertEquals(number.getNumbers().size(), 3);
 

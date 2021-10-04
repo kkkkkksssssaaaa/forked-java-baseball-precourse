@@ -5,16 +5,20 @@ import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Player extends PlayerTemplate {
+public class Player extends AbstractPlayer {
 
-    private final List<Integer> numbers = new ArrayList<>();
+    // TODO must modified be numbers variable is `final`
+    private List<Integer> numbers = new ArrayList<>();
 
-    public Player (String consoleInput) {
+    public Player(String consoleInput) {
         numbers.addAll(initializeNumbers(consoleInput));
     }
 
     @Override
     public List<Integer> getNumbers() { return this.numbers; }
+
+    @Override
+    public Integer getSize() { return this.numbers.size(); }
 
     private List<Integer> initializeNumbers(String consoleInput) {
         Boolean isInteger = isIntegerString(consoleInput);
@@ -50,7 +54,7 @@ public class Player extends PlayerTemplate {
     private List<Integer> checkSizeAfterReturn(List<Integer> input) {
         Set<Integer> toSet = new HashSet<>(checkValidValueAfterReturn(input));
 
-        if (toSet.size() == size) {
+        if (toSet.size() == maxSize) {
             return input;
         }
 
