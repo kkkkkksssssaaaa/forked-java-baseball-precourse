@@ -5,13 +5,18 @@ import baseball.model.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScoreControllerTest {
 
-    ScoreController scoreController = new ScoreController();
     ComputerPlayer computer = new ComputerPlayer();
+    ScoreController scoreController = new ScoreController();
 
     @Nested
     @DisplayName("낫싱 테스트")
@@ -32,6 +37,20 @@ class ScoreControllerTest {
         }
 
         @Test
+        void 콜렉션의_요소가_비어있어도_false를_반환한다() {
+            String playerNumber = "165";
+
+            Player player = new Player(playerNumber);
+
+
+            ComputerPlayer computer = new ComputerPlayer();
+            computer.setNumbersOnlyTest(new ArrayList<>());
+
+            Boolean isNothing = scoreController.isNothing(player, computer);
+
+            assertFalse(isNothing);
+        }
+        @Test
         void 두_컬렉션을_비교하여_같은_요소가_존재한다면_false를_반환한다() {
             StringBuilder getNumbers = new StringBuilder();
 
@@ -46,6 +65,55 @@ class ScoreControllerTest {
             Boolean isNothing = scoreController.isNothing(player, computer);
 
             assertFalse(isNothing);
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = { "165", "145", "154", "156", "175", "198", "197", "256", "298", "276", "245", "256", "365", "672", "265"," 372", "376" })
+        void 두_컬렉션을_비교하여_한_가지_요소만_같아도_false를_반환한다() {
+            // this test must be failed
+            List<Integer> computerList = new ArrayList<>();
+
+            computerList.add(1);
+            computerList.add(2);
+            computerList.add(3);
+
+            ComputerPlayer computer = createNewComputer(computerList);
+
+            String playerNumber = "165";
+
+            Player player = new Player(playerNumber);
+
+            Boolean isNotiong = scoreController.isNothing(player, computer);
+
+            assertFalse(isNotiong);
+        }
+
+        @Test
+        void 두_컬렉션을_비교하여_같은_요소가_존재하지_않는다면_true를_반환한다() {
+            // this test must be failed
+            List<Integer> computerList = new ArrayList<>();
+
+            computerList.add(1);
+            computerList.add(2);
+            computerList.add(3);
+
+            ComputerPlayer computer = createNewComputer(computerList);
+
+            String playerNumber = "456";
+
+            Player player = new Player(playerNumber);
+
+            Boolean isNotiong = scoreController.isNothing(player, computer);
+
+            assertTrue(isNotiong);
+        }
+
+        private ComputerPlayer createNewComputer(List<Integer> numbers) {
+            ComputerPlayer computer = new ComputerPlayer();
+
+            computer.setNumbersOnlyTest(numbers);
+
+            return computer;
         }
 
 
