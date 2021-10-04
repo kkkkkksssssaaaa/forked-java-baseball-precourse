@@ -9,9 +9,9 @@ import java.util.Set;
 
 public abstract class AbstractPlayer {
 
-    Integer startIdx = 1;
-    Integer endIdx = 9;
-    Integer maxSize = 3;
+    protected final Integer startIdx = 1;
+    protected final Integer endIdx = 9;
+    protected final Integer maxSize = 3;
 
     public abstract List<Integer> getNumbers();
     public abstract Integer getSize();
