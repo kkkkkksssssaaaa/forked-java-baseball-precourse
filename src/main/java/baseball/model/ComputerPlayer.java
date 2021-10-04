@@ -37,6 +37,7 @@ public class ComputerPlayer extends AbstractPlayer {
      * List<Integer> 를 입력받아 해당 입력 인자를 해당 클래스의 필드로 사용
      */
     public void setNumbersOnlyTest(List<Integer> numbers) {
+        this.numbers.clear();
         this.numbers.addAll(numbers);
     }
 
