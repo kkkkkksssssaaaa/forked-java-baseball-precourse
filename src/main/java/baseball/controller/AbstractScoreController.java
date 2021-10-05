@@ -11,6 +11,7 @@ public abstract class AbstractScoreController {
     public abstract Boolean isNothing(Player player, ComputerPlayer computer);
     public abstract Boolean isFourBall(Player player, ComputerPlayer computer);
     public abstract Integer getStrikeCount(Player player, ComputerPlayer computer);
+    public abstract Integer getBallCount(Player player, ComputerPlayer computer);
 
     protected Boolean checkValid(Player player, ComputerPlayer computer) {
         if (!checkPresent(player, computer)) {

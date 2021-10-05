@@ -310,6 +310,83 @@ class ScoreControllerTest {
 
     }
 
+    @Nested
+    @DisplayName("볼 테스트")
+    class BallTest {
+
+        @Nested
+        @DisplayName("Failed 테스트")
+        class FailedTest {
+
+            @Test
+            void Null을_인자로_받으면_0을_반환한다() {
+                Integer getCount = scoreController.getBallCount(null, null);
+
+                assertEquals(getCount, 0);
+            }
+
+            @Test
+            void 인자_중_한_개라도_Null이_포함_되어_있다면_0을_반환한다() {
+                Integer getCount = scoreController.getBallCount(null, computer);
+
+                assertEquals(getCount, 0);
+            }
+
+            @Test
+            void 컬렉션의_요소가_비어있어도_0을_반환한다() {
+                String playerNumber = "165";
+
+                Player player = new Player(playerNumber);
+
+                ComputerPlayer computer = new ComputerPlayer();
+                computer.setNumbersOnlyTest(new ArrayList<>());
+
+                Integer getCount = scoreController.getBallCount(player, computer);
+
+                assertEquals(getCount, 0);
+            }
+
+            @ParameterizedTest
+            @CsvSource(value = { "123:456", "123:789", "456:123", "456:789", "789:321", "789:654", "126:123", "173:123", "124:123", "523:123", "723:123", "163:123", "173:123" }, delimiter = ':')
+            void 컬렉션의_요소_중_중복되는_요소가_없다면_0을_반환한다(String playerNumber,
+                                                String computerNumber) {
+                Player player = new Player(playerNumber);
+                ComputerPlayer computer = createNewComputer(computerNumber);
+
+                Integer getCount = scoreController.getBallCount(player, computer);
+
+                assertEquals(getCount, 0);
+            }
+
+            @ParameterizedTest
+            @CsvSource(value = {
+                    "156:123", "178:123", "524:123", "527:123",
+                    "729:123", "563:123", "873:123", "123:123",
+                    "234:234", "345:345", "534:534", "567:567",
+                    "789:789", "987:987", "781:789", "129:789"
+            }, delimiter = ':')
+            void 컬렉션의_요소_중_중복되는_요소가_있지만_자리가_같은_경우라도_0을_반환한다(String playerNumber,
+                                                                         String computerNumber) {
+                Player player = new Player(playerNumber);
+                ComputerPlayer computer = createNewComputer(computerNumber);
+
+                Integer getCount = scoreController.getBallCount(player, computer);
+
+                assertEquals(getCount, 0);
+            }
+
+        }
+
+        @Nested
+        @DisplayName("Success 테스트")
+        class SuccessTest {
+
+
+
+        }
+
+    }
+
     private ComputerPlayer createNewComputer(String numberString) {
         ComputerPlayer computer = new ComputerPlayer();
 

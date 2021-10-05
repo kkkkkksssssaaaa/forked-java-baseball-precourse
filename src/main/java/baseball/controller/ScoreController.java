@@ -53,4 +53,9 @@ public class ScoreController extends AbstractScoreController {
         return getCount;
     }
 
+    @Override
+    public Integer getBallCount(Player player, ComputerPlayer computer) {
+        return 0;
+    }
+
 }
