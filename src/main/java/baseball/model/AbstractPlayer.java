@@ -16,4 +16,8 @@ public abstract class AbstractPlayer {
     public abstract List<Integer> getNumbers();
     public abstract Integer getSize();
 
+    public int getMaxSize() {
+        return this.maxSize;
+    }
+
 }

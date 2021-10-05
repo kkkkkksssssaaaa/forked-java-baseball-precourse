@@ -1,6 +1,7 @@
 package baseball.controller;
 
 import baseball.model.ComputerPlayer;
+import baseball.model.GameStatus;
 import baseball.model.Player;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public abstract class AbstractGameController {
     public abstract Boolean isFourBall(Player player, ComputerPlayer computer);
     public abstract Integer getStrikeCount(Player player, ComputerPlayer computer);
     public abstract Integer getBallCount(Player player, ComputerPlayer computer);
+    public abstract GameStatus checkRestart(String input);
 
     /**
      * Player 정보의 null 검사
