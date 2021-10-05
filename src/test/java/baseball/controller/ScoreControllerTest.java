@@ -73,7 +73,13 @@ class ScoreControllerTest {
             }
 
             @ParameterizedTest
-            @ValueSource(strings = { "165", "145", "154", "156", "175", "198", "197", "256", "298", "276", "245", "256", "365", "672", "265"," 372", "376" })
+            @ValueSource(strings = {
+                    "165", "145", "154", "156",
+                    "175", "198", "197", "256",
+                    "298", "276", "245", "256",
+                    "365", "672", "265", "372",
+                    "376", "269", "294", "731"
+            })
             void 두_컬렉션을_비교하여_한_가지_요소만_같아도_false를_반환한다() {
                 ComputerPlayer computer = createNewComputer("123");
 
@@ -144,7 +150,13 @@ class ScoreControllerTest {
             }
 
             @ParameterizedTest
-            @ValueSource(strings = { "165", "145", "154", "156", "175", "198", "197", "256", "298", "276", "245", "256", "365", "672", "265"," 372", "376" })
+            @ValueSource(strings = {
+                    "165", "145", "154", "156",
+                    "175", "198", "197", "256",
+                    "298", "276", "245", "256",
+                    "365", "672", "265", "372",
+                    "376", "269", "294", "731"
+            })
             void 두_컬렉션을_비교하여_한_가지_요소만_같아도_false를_반환한다() {
                 ComputerPlayer computer = createNewComputer("123");
 
@@ -188,8 +200,10 @@ class ScoreControllerTest {
         @DisplayName("Success 테스트")
         class SuccessTest {
             @ParameterizedTest
-            @CsvSource(value = { "123:312", "123:231", "456:564", "456:645", "789:897", "789:978" },
-                    delimiter = ':')
+            @CsvSource(value = {
+                    "123:312", "123:231", "456:564", "456:645",
+                    "789:897", "789:978", "243:432", "876:687"
+            }, delimiter = ':')
             void 두_컬렉션을_비교하여_모든_요소를_포함하지만_자리가_다른_경우만_true를_반환한다(String playerNumber,
                                                                 String computerNumber) {
                 ComputerPlayer computer = createNewComputer(computerNumber);
@@ -241,7 +255,10 @@ class ScoreControllerTest {
             }
 
             @ParameterizedTest
-            @CsvSource(value = { "123:456", "123:789", "456:123", "456:789", "789:321", "789:654" }, delimiter = ':')
+            @CsvSource(value = {
+                    "123:456", "123:789", "456:123", "456:789",
+                    "789:321", "789:654", "145:987", "615:987"
+            }, delimiter = ':')
             void 컬렉션의_요소_중_중복되는_요소가_없다면_0을_반환한다(String playerNumber,
                                                 String computerNumber) {
                 Player player = new Player(playerNumber);
@@ -253,7 +270,10 @@ class ScoreControllerTest {
             }
 
             @ParameterizedTest
-            @CsvSource(value = { "345:123", "256:123", "356:123", "124:456", "512:456" }, delimiter = ':')
+            @CsvSource(value = {
+                    "345:123", "256:123", "356:123", "124:456",
+                    "512:456", "712:137", "412:125", "523:465"
+            }, delimiter = ':')
             void 컬렉션의_요소_중_중복되는_요소가_있지만_자리가_틀린_경우_0을_반환한다(String playerNumber,
                                                           String computerNumber) {
                 Player player = new Player(playerNumber);
@@ -271,7 +291,10 @@ class ScoreControllerTest {
         class SuccessTest {
 
             @ParameterizedTest
-            @CsvSource(value = { "156:123", "178:123", "524:123", "527:123", "729:123", "563:123", "873:123" }, delimiter = ':')
+            @CsvSource(value = {
+                    "156:123", "178:123", "524:123", "527:123",
+                    "729:123", "563:123", "873:123", "583:123"
+            }, delimiter = ':')
             void 컬렉션의_요소_중_중복되는_요소_중_한_개가_같은_값이며_모두_같은_자리에_있는_경우_1을_반환한다(String playerNumber,
                                                                          String computerNumber) {
                 Player player = new Player(playerNumber);
@@ -283,7 +306,10 @@ class ScoreControllerTest {
             }
 
             @ParameterizedTest
-            @CsvSource(value = { "126:123", "173:123", "124:123", "523:123", "723:123", "163:123", "173:123" }, delimiter = ':')
+            @CsvSource(value = {
+                    "126:123", "173:123", "124:123", "523:123",
+                    "723:123", "163:123", "173:123", "623:123"
+            }, delimiter = ':')
             void 컬렉션의_요소_중_중복되는_요소_중_한_개가_같은_값이며_모두_같은_자리에_있는_경우_2를_반환한다(String playerNumber,
                                                                          String computerNumber) {
                 Player player = new Player(playerNumber);
@@ -295,7 +321,10 @@ class ScoreControllerTest {
             }
 
             @ParameterizedTest
-            @CsvSource(value = { "123:123", "234:234", "345:345", "534:534", "567:567", "789:789", "987:987" }, delimiter = ':')
+            @CsvSource(value = {
+                    "123:123", "234:234", "345:345", "534:534",
+                    "567:567", "789:789", "987:987", "561:561"
+            }, delimiter = ':')
             void 컬렉션의_요소가_모두_중복되며_모두_같은_자리에_있을_경우_3을_반환한다(String playerNumber,
                                                           String computerNumber) {
                 Player player = new Player(playerNumber);
@@ -347,7 +376,11 @@ class ScoreControllerTest {
             }
 
             @ParameterizedTest
-            @CsvSource(value = { "123:456", "123:789", "456:123", "456:789", "789:321", "789:654", "126:123", "173:123", "124:123", "523:123", "723:123", "163:123", "173:123" }, delimiter = ':')
+            @CsvSource(value = {
+                    "123:456", "123:789", "456:123", "456:789",
+                    "789:321", "789:654", "145:987", "615:987"
+
+            }, delimiter = ':')
             void 컬렉션의_요소_중_중복되는_요소가_없다면_0을_반환한다(String playerNumber,
                                                 String computerNumber) {
                 Player player = new Player(playerNumber);
