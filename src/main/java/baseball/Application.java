@@ -1,5 +1,6 @@
 package baseball;
 
+import baseball.controller.ScoreController;
 import baseball.model.ComputerPlayer;
 import baseball.model.Player;
 import nextstep.utils.Console;
@@ -8,6 +9,8 @@ public class Application {
     public static void main(String[] args) {
         // TODO UI 로직 분리 필요
         ComputerPlayer computer = new ComputerPlayer();
+        ScoreController scoreController = new ScoreController();
+        System.out.println("[TEST] print computer : " + computer.getNumbers());
 
         System.out.println("[TEST] 1부터 9까지의 중복되지 않은 숫자 세 개를 연속하여 입력해주세요.");
 
@@ -21,7 +24,21 @@ public class Application {
             player = new Player(retry);
         }
 
-        System.out.println("print player : " + player.getNumbers());
-        System.out.println("print computer : " + computer.getNumbers());
+        System.out.println("[TEST] print player : " + player.getNumbers());
+
+        boolean isPlaying = true;
+
+        while(isPlaying) {
+            if (scoreController.isNothing(player, computer)) {
+                System.out.println("[TEST] 낫싱!");
+            }
+
+            if (scoreController.isFourBall(player, computer)) {
+                System.out.println("[TEST] 포볼!");
+            }
+
+            String retry = Console.readLine();
+            player = new Player(retry);
+        }
     }
 }

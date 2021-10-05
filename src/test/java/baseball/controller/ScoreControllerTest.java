@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
@@ -189,8 +190,54 @@ class ScoreControllerTest {
             assertFalse(isFourBall);
         }
 
+        @ParameterizedTest
+        @ValueSource(strings = { "132", "213", "321" })
+        void 두_컬렉션을_비교하여_모든_요소를_포함하지만_한_자리만_같아도_false를_반환한다(String input) {
+            List<Integer> computerList = new ArrayList<>();
+
+            computerList.add(1);
+            computerList.add(2);
+            computerList.add(3);
+
+            ComputerPlayer computer = createNewComputer(computerList);
+
+            Player player = new Player(input);
+
+            Boolean isFourBall = scoreController.isFourBall(player, computer);
+
+            assertFalse(isFourBall);
+        }
+
+        @ParameterizedTest
+        @CsvSource(value = { "123:312", "123:231", "456:564", "456:645", "789:897", "789:978" },
+                delimiter = ':')
+        void 두_컬렉션을_비교하여_모든_요소를_포함하지만_자리가_다른_경우만_true를_반환한다(String playerNumber,
+                                                            String computerNumber) {
+            ComputerPlayer computer = createNewComputer(computerNumber);
+
+            Player player = new Player(playerNumber);
+
+            Boolean isFourBall = scoreController.isFourBall(player, computer);
+
+            assertTrue(isFourBall);
+        }
+
         private ComputerPlayer createNewComputer(List<Integer> numbers) {
             ComputerPlayer computer = new ComputerPlayer();
+
+            computer.setNumbersOnlyTest(numbers);
+
+            return computer;
+        }
+
+        private ComputerPlayer createNewComputer(String numberString) {
+            ComputerPlayer computer = new ComputerPlayer();
+
+            List<Integer> numbers = new ArrayList<>();
+
+            for (int i = 0; i < numberString.length(); i++) {
+                numbers.add(Integer.parseInt(numberString.substring(i, (i + 1))));
+            }
 
             computer.setNumbersOnlyTest(numbers);
 
