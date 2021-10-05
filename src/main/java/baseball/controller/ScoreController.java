@@ -38,5 +38,9 @@ public class ScoreController extends AbstractScoreController {
         return true;
     }
 
+    @Override
+    public Integer getStrikeCount(Player player, ComputerPlayer computer) {
+        return 0;
+    }
 
 }

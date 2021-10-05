@@ -72,13 +72,7 @@ class ScoreControllerTest {
         @ParameterizedTest
         @ValueSource(strings = { "165", "145", "154", "156", "175", "198", "197", "256", "298", "276", "245", "256", "365", "672", "265"," 372", "376" })
         void 두_컬렉션을_비교하여_한_가지_요소만_같아도_false를_반환한다() {
-            List<Integer> computerList = new ArrayList<>();
-
-            computerList.add(1);
-            computerList.add(2);
-            computerList.add(3);
-
-            ComputerPlayer computer = createNewComputer(computerList);
+            ComputerPlayer computer = createNewComputer("123");
 
             String playerNumber = "165";
 
@@ -91,13 +85,7 @@ class ScoreControllerTest {
 
         @Test
         void 두_컬렉션을_비교하여_같은_요소가_존재하지_않는다면_true를_반환한다() {
-            List<Integer> computerList = new ArrayList<>();
-
-            computerList.add(1);
-            computerList.add(2);
-            computerList.add(3);
-
-            ComputerPlayer computer = createNewComputer(computerList);
+            ComputerPlayer computer = createNewComputer("123");
 
             String playerNumber = "456";
 
@@ -106,14 +94,6 @@ class ScoreControllerTest {
             Boolean isNothing = scoreController.isNothing(player, computer);
 
             assertTrue(isNothing);
-        }
-
-        private ComputerPlayer createNewComputer(List<Integer> numbers) {
-            ComputerPlayer computer = new ComputerPlayer();
-
-            computer.setNumbersOnlyTest(numbers);
-
-            return computer;
         }
 
     }
@@ -154,13 +134,7 @@ class ScoreControllerTest {
         @ParameterizedTest
         @ValueSource(strings = { "165", "145", "154", "156", "175", "198", "197", "256", "298", "276", "245", "256", "365", "672", "265"," 372", "376" })
         void 두_컬렉션을_비교하여_한_가지_요소만_같아도_false를_반환한다() {
-            List<Integer> computerList = new ArrayList<>();
-
-            computerList.add(1);
-            computerList.add(2);
-            computerList.add(3);
-
-            ComputerPlayer computer = createNewComputer(computerList);
+            ComputerPlayer computer = createNewComputer("123");
 
             String playerNumber = "165";
 
@@ -173,13 +147,7 @@ class ScoreControllerTest {
 
         @Test
         void 두_컬렉션을_비교하여_같은_요소가_존재하지_않는다면_false를_반환한다() {
-            List<Integer> computerList = new ArrayList<>();
-
-            computerList.add(1);
-            computerList.add(2);
-            computerList.add(3);
-
-            ComputerPlayer computer = createNewComputer(computerList);
+            ComputerPlayer computer = createNewComputer("123");
 
             String playerNumber = "456";
 
@@ -193,13 +161,7 @@ class ScoreControllerTest {
         @ParameterizedTest
         @ValueSource(strings = { "132", "213", "321" })
         void 두_컬렉션을_비교하여_모든_요소를_포함하지만_한_자리만_같아도_false를_반환한다(String input) {
-            List<Integer> computerList = new ArrayList<>();
-
-            computerList.add(1);
-            computerList.add(2);
-            computerList.add(3);
-
-            ComputerPlayer computer = createNewComputer(computerList);
+            ComputerPlayer computer = createNewComputer("123");
 
             Player player = new Player(input);
 
@@ -222,28 +184,78 @@ class ScoreControllerTest {
             assertTrue(isFourBall);
         }
 
-        private ComputerPlayer createNewComputer(List<Integer> numbers) {
-            ComputerPlayer computer = new ComputerPlayer();
+    }
 
-            computer.setNumbersOnlyTest(numbers);
+    @Nested
+    @DisplayName("스트라이크 테스트")
+    class StrikeTest {
 
-            return computer;
+        @Test
+        void Null을_인자로_받으면_0을_반환한다() {
+            Integer getCount = scoreController.getStrikeCount(null, null);
+
+            assertEquals(getCount, 0);
         }
 
-        private ComputerPlayer createNewComputer(String numberString) {
-            ComputerPlayer computer = new ComputerPlayer();
+        @Test
+        void 인자_중_한_개라도_Null이_포함_되어_있다면_0을_반환한다() {
+            Integer getCount = scoreController.getStrikeCount(null, computer);
 
-            List<Integer> numbers = new ArrayList<>();
-
-            for (int i = 0; i < numberString.length(); i++) {
-                numbers.add(Integer.parseInt(numberString.substring(i, (i + 1))));
-            }
-
-            computer.setNumbersOnlyTest(numbers);
-
-            return computer;
+            assertEquals(getCount, 0);
         }
 
+        @Test
+        void 컬렉션의_요소가_비어있어도_0을_반환한다() {
+            String playerNumber = "165";
+
+            Player player = new Player(playerNumber);
+
+            ComputerPlayer computer = new ComputerPlayer();
+            computer.setNumbersOnlyTest(new ArrayList<>());
+
+            Integer getCount = scoreController.getStrikeCount(player, computer);
+
+            assertEquals(getCount, 0);
+        }
+
+        @ParameterizedTest
+        @CsvSource(value = { "123:456", "123:789", "456:123", "456:789", "789:321", "789:654" }, delimiter = ':')
+        void 컬렉션의_요소_중_중복되는_요소가_없다면_0을_반환한다(String playerNumber,
+                                            String computerNumber) {
+            Player player = new Player(playerNumber);
+            ComputerPlayer computer = createNewComputer(computerNumber);
+
+            Integer getCount = scoreController.getStrikeCount(player, computer);
+
+            assertEquals(getCount, 0);
+        }
+
+        @ParameterizedTest
+        @CsvSource(value = { "345:123", "256:123", "356:123", "124:456", "512:456" }, delimiter = ':')
+        void 컬렉션의_요소_중_중복되는_요소가_있지만_자리가_틀린_경우_0을_반환한다(String playerNumber,
+                                                      String computerNumber) {
+            Player player = new Player(playerNumber);
+            ComputerPlayer computer = createNewComputer(computerNumber);
+
+            Integer getCount = scoreController.getStrikeCount(player, computer);
+
+            assertEquals(getCount, 0);
+        }
+
+    }
+
+    private ComputerPlayer createNewComputer(String numberString) {
+        ComputerPlayer computer = new ComputerPlayer();
+
+        List<Integer> numbers = new ArrayList<>();
+
+        for (int i = 0; i < numberString.length(); i++) {
+            numbers.add(Integer.parseInt(numberString.substring(i, (i + 1))));
+        }
+
+        computer.setNumbersOnlyTest(numbers);
+
+        return computer;
     }
 
 }
