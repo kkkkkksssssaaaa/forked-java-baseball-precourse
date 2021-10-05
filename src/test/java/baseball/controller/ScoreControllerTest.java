@@ -38,7 +38,7 @@ class ScoreControllerTest {
         }
 
         @Test
-        void 콜렉션의_요소가_비어있어도_false를_반환한다() {
+        void 컬렉션의_요소가_비어있어도_false를_반환한다() {
             String playerNumber = "165";
 
             Player player = new Player(playerNumber);
@@ -137,7 +137,7 @@ class ScoreControllerTest {
         }
 
         @Test
-        void 콜렉션의_요소가_비어있어도_false를_반환한다() {
+        void 컬렉션의_요소가_비어있어도_false를_반환한다() {
             String playerNumber = "165";
 
             Player player = new Player(playerNumber);
