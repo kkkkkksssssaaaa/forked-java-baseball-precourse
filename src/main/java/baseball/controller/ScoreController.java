@@ -10,17 +10,25 @@ import java.util.Optional;
 public class ScoreController {
 
     public Boolean isNothing(Player player, ComputerPlayer computer) {
-        if (isValid(player, computer)) {
-            boolean checkNothing = true;
-            int i = 0;
+        if (!isValid(player, computer)) {
+            return false;
+        }
 
-            while(checkNothing && i < player.getSize()) {
-                checkNothing = !computer.getNumbers().contains(player.getNumbers().get(i));
+        boolean checkNothing = true;
+        int i = 0;
 
-                i++;
-            }
+        while(checkNothing && i < player.getSize()) {
+            checkNothing = !computer.getNumbers().contains(player.getNumbers().get(i));
 
-            return checkNothing;
+            i++;
+        }
+
+        return checkNothing;
+    }
+
+    public Boolean isFourBall(Player player, ComputerPlayer computer) {
+        if (!isValid(player, computer)) {
+            return false;
         }
 
         return false;

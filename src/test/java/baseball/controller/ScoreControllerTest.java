@@ -50,6 +50,7 @@ class ScoreControllerTest {
 
             assertFalse(isNothing);
         }
+
         @Test
         void 두_컬렉션을_비교하여_같은_요소가_존재한다면_false를_반환한다() {
             StringBuilder getNumbers = new StringBuilder();
@@ -70,7 +71,6 @@ class ScoreControllerTest {
         @ParameterizedTest
         @ValueSource(strings = { "165", "145", "154", "156", "175", "198", "197", "256", "298", "276", "245", "256", "365", "672", "265"," 372", "376" })
         void 두_컬렉션을_비교하여_한_가지_요소만_같아도_false를_반환한다() {
-            // this test must be failed
             List<Integer> computerList = new ArrayList<>();
 
             computerList.add(1);
@@ -83,14 +83,13 @@ class ScoreControllerTest {
 
             Player player = new Player(playerNumber);
 
-            Boolean isNotiong = scoreController.isNothing(player, computer);
+            Boolean isNothing = scoreController.isNothing(player, computer);
 
-            assertFalse(isNotiong);
+            assertFalse(isNothing);
         }
 
         @Test
         void 두_컬렉션을_비교하여_같은_요소가_존재하지_않는다면_true를_반환한다() {
-            // this test must be failed
             List<Integer> computerList = new ArrayList<>();
 
             computerList.add(1);
@@ -103,9 +102,9 @@ class ScoreControllerTest {
 
             Player player = new Player(playerNumber);
 
-            Boolean isNotiong = scoreController.isNothing(player, computer);
+            Boolean isNothing = scoreController.isNothing(player, computer);
 
-            assertTrue(isNotiong);
+            assertTrue(isNothing);
         }
 
         private ComputerPlayer createNewComputer(List<Integer> numbers) {
@@ -116,6 +115,87 @@ class ScoreControllerTest {
             return computer;
         }
 
+    }
+
+    @Nested
+    @DisplayName("포볼 테스트")
+    class FourBallTest {
+
+        @Test
+        void Null을_인자로_받으면_false를_반환한다() {
+            Boolean isFourBall = scoreController.isFourBall(null, null);
+
+            assertFalse(isFourBall);
+        }
+
+        @Test
+        void 인자_중_한_개라도_Null이_포함_되어_있다면_false를_반환한다() {
+            Boolean isFourBall = scoreController.isFourBall(null, computer);
+
+            assertFalse(isFourBall);
+        }
+
+        @Test
+        void 콜렉션의_요소가_비어있어도_false를_반환한다() {
+            String playerNumber = "165";
+
+            Player player = new Player(playerNumber);
+
+
+            ComputerPlayer computer = new ComputerPlayer();
+            computer.setNumbersOnlyTest(new ArrayList<>());
+
+            Boolean isFourBall = scoreController.isFourBall(player, computer);
+
+            assertFalse(isFourBall);
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = { "165", "145", "154", "156", "175", "198", "197", "256", "298", "276", "245", "256", "365", "672", "265"," 372", "376" })
+        void 두_컬렉션을_비교하여_한_가지_요소만_같아도_false를_반환한다() {
+            List<Integer> computerList = new ArrayList<>();
+
+            computerList.add(1);
+            computerList.add(2);
+            computerList.add(3);
+
+            ComputerPlayer computer = createNewComputer(computerList);
+
+            String playerNumber = "165";
+
+            Player player = new Player(playerNumber);
+
+            Boolean isFourBall = scoreController.isFourBall(player, computer);
+
+            assertFalse(isFourBall);
+        }
+
+        @Test
+        void 두_컬렉션을_비교하여_같은_요소가_존재하지_않는다면_false를_반환한다() {
+            List<Integer> computerList = new ArrayList<>();
+
+            computerList.add(1);
+            computerList.add(2);
+            computerList.add(3);
+
+            ComputerPlayer computer = createNewComputer(computerList);
+
+            String playerNumber = "456";
+
+            Player player = new Player(playerNumber);
+
+            Boolean isFourBall = scoreController.isFourBall(player, computer);
+
+            assertFalse(isFourBall);
+        }
+
+        private ComputerPlayer createNewComputer(List<Integer> numbers) {
+            ComputerPlayer computer = new ComputerPlayer();
+
+            computer.setNumbersOnlyTest(numbers);
+
+            return computer;
+        }
 
     }
 
