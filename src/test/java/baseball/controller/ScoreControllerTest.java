@@ -414,7 +414,52 @@ class ScoreControllerTest {
         @DisplayName("Success 테스트")
         class SuccessTest {
 
+            @ParameterizedTest
+            @CsvSource(value = {
+                    "345:123", "245:123", "254:123", "256:123",
+                    "367:123", "368:123", "269:123", "398:123",
+                    "365:123", "285:123", "129:234", "173:234"
+            }, delimiter = ':')
+            void 컬렉션의_요소_중_중복되는_요소_중_한_개가_같은_값이지만_자리가_다를_경우_1을_반환한다(String playerNumber,
+                                                                         String computerNumber) {
+                Player player = new Player(playerNumber);
+                ComputerPlayer computer = createNewComputer(computerNumber);
 
+                Integer getCount = scoreController.getBallCount(player, computer);
+
+                assertEquals(getCount, 1);
+            }
+
+            @ParameterizedTest
+            @CsvSource(value = {
+                    "315:123", "215:123", "214:123", "216:123",
+                    "317:123", "318:123", "261:123", "391:123",
+                    "362:123", "281:123", "329:234", "143:234"
+            }, delimiter = ':')
+            void 컬렉션의_요소_중_중복되는_요소_중_두_개가_같은_값이지만_자리가_모두_다를_경우_2를_반환한다(String playerNumber,
+                                                                         String computerNumber) {
+                Player player = new Player(playerNumber);
+                ComputerPlayer computer = createNewComputer(computerNumber);
+
+                Integer getCount = scoreController.getBallCount(player, computer);
+
+                assertEquals(getCount, 2);
+            }
+
+            @ParameterizedTest
+            @CsvSource(value = {
+                    "312:123", "423:234", "534:345", "453:534",
+                    "756:567", "978:789", "798:987", "156:561"
+            }, delimiter = ':')
+            void 컬렉션의_요소가_모두_중복되지만_자리가_모두_다를_경우_3을_반환한다(String playerNumber,
+                                                          String computerNumber) {
+                Player player = new Player(playerNumber);
+                ComputerPlayer computer = createNewComputer(computerNumber);
+
+                Integer getCount = scoreController.getBallCount(player, computer);
+
+                assertEquals(getCount, 3);
+            }
 
         }
 

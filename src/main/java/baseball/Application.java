@@ -35,21 +35,26 @@ public class Application {
                 String retry = Console.readLine();
                 player = new Player(retry);
 
-                break;
+                continue;
             } else if (scoreController.isFourBall(player, computer)) {
                 System.out.println("[TEST] 포볼!");
 
                 String retry = Console.readLine();
                 player = new Player(retry);
 
-                break;
+                continue;
             }
 
             StringBuilder writeHint = new StringBuilder();
             Integer getStrikeCount = scoreController.getStrikeCount(player, computer);
+            Integer getBallCount = scoreController.getBallCount(player, computer);
 
             if (getStrikeCount > 0) {
-                writeHint.append(getStrikeCount + " 스트라이크");
+                writeHint.append(getStrikeCount + " 스트라이크 ");
+            }
+
+            if (getBallCount > 0) {
+                writeHint.append(getBallCount + " 볼");
             }
 
             System.out.println(writeHint);
