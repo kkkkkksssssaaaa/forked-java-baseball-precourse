@@ -40,7 +40,17 @@ public class ScoreController extends AbstractScoreController {
 
     @Override
     public Integer getStrikeCount(Player player, ComputerPlayer computer) {
-        return 0;
+        if (!super.checkValid(player, computer)) {
+            return 0;
+        }
+
+        int getCount = 0;
+
+        for (int i = 0; i < computer.getSize(); i++) {
+            getCount += checkSamePlace(player.getNumbers().get(i), computer.getNumbers().get(i));
+        }
+
+        return getCount;
     }
 
 }

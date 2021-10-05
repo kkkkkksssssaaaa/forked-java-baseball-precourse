@@ -78,17 +78,25 @@ public abstract class AbstractScoreController {
         return checkIsNotContainsAll;
     }
 
+    protected Integer checkSamePlace(Integer playerNumber, Integer computerNumber) {
+        if (computerNumber.equals(playerNumber)) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     protected Boolean checkNotSamePlace(Player player, ComputerPlayer computer) {
-        boolean checkIsSamePlace = true;
+        boolean checkNotSamePlace = true;
         int i = 0;
 
-        while (checkIsSamePlace && i < player.getSize()) {
-            checkIsSamePlace = !computer.getNumbers().get(i).equals(player.getNumbers().get(i));
+        while (checkNotSamePlace && i < player.getSize()) {
+            checkNotSamePlace = !computer.getNumbers().get(i).equals(player.getNumbers().get(i));
 
             i++;
         }
 
-        return checkIsSamePlace;
+        return checkNotSamePlace;
     }
 
 }

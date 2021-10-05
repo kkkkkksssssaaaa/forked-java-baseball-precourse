@@ -31,11 +31,28 @@ public class Application {
         while(isPlaying) {
             if (scoreController.isNothing(player, computer)) {
                 System.out.println("[TEST] 낫싱!");
+
+                String retry = Console.readLine();
+                player = new Player(retry);
+
+                break;
+            } else if (scoreController.isFourBall(player, computer)) {
+                System.out.println("[TEST] 포볼!");
+
+                String retry = Console.readLine();
+                player = new Player(retry);
+
+                break;
             }
 
-            if (scoreController.isFourBall(player, computer)) {
-                System.out.println("[TEST] 포볼!");
+            StringBuilder writeHint = new StringBuilder();
+            Integer getStrikeCount = scoreController.getStrikeCount(player, computer);
+
+            if (getStrikeCount > 0) {
+                writeHint.append(getStrikeCount + " 스트라이크");
             }
+
+            System.out.println(writeHint);
 
             String retry = Console.readLine();
             player = new Player(retry);
