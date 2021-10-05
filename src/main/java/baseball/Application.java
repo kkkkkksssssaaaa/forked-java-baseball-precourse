@@ -1,6 +1,6 @@
 package baseball;
 
-import baseball.controller.ScoreController;
+import baseball.controller.GameController;
 import baseball.model.ComputerPlayer;
 import baseball.model.Player;
 import nextstep.utils.Console;
@@ -9,7 +9,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO UI 로직 분리 필요
         ComputerPlayer computer = new ComputerPlayer();
-        ScoreController scoreController = new ScoreController();
+        GameController scoreController = new GameController();
         System.out.println("[TEST] print computer : " + computer.getNumbers());
 
         System.out.println("[TEST] 1부터 9까지의 중복되지 않은 숫자 세 개를 연속하여 입력해주세요.");
@@ -50,11 +50,11 @@ public class Application {
             Integer getBallCount = scoreController.getBallCount(player, computer);
 
             if (getStrikeCount > 0) {
-                writeHint.append(getStrikeCount + " 스트라이크 ");
+                writeHint.append(getStrikeCount + "스트라이크 ");
             }
 
             if (getBallCount > 0) {
-                writeHint.append(getBallCount + " 볼");
+                writeHint.append(getBallCount + "볼");
             }
 
             System.out.println(writeHint);

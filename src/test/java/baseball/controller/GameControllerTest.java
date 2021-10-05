@@ -14,10 +14,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ScoreControllerTest {
+class GameControllerTest {
 
     ComputerPlayer computer = new ComputerPlayer();
-    ScoreController scoreController = new ScoreController();
+    GameController scoreController = new GameController();
 
     @Nested
     @DisplayName("낫싱 테스트")

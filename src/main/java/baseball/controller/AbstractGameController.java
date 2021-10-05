@@ -6,7 +6,7 @@ import baseball.model.Player;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractScoreController {
+public abstract class AbstractGameController {
 
     public abstract Boolean isNothing(Player player, ComputerPlayer computer);
     public abstract Boolean isFourBall(Player player, ComputerPlayer computer);
