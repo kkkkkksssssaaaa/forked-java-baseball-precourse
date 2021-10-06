@@ -4,6 +4,7 @@ public enum GameStatus {
 
     RESTART(1),
     END_GAME(2),
+    PLAYING(0),
     NOTHING(3)
     ;
 
