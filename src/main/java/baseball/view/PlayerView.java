@@ -13,7 +13,7 @@ public class PlayerView {
         Player player = new Player(consoleInput);
 
         while (player.getSize() == 0) {
-            System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
+            System.out.println("[ERROR] 유효하지 않은 입력입니다. 다시 입력해주세요.");
 
             String retry = Console.readLine();
             player = new Player(retry);
