@@ -21,14 +21,24 @@ public class ComputerPlayer extends AbstractPlayer {
     @Override
     public Integer getSize() { return this.numbers.size(); }
 
-    private Set<Integer> initializeNumbers() {
-        Set<Integer> createNumbers = new HashSet<Integer>();
+    private List<Integer> initializeNumbers() {
+        List<Integer> numbers = new ArrayList<>();
 
-        while(createNumbers.size() < maxSize) {
-            createNumbers.add(Randoms.pickNumberInRange(startIdx, endIdx));
+        while(numbers.size() < 3) {
+            numbers.add(getNotDuplicatedNumber(numbers));
         }
 
-        return createNumbers;
+        return numbers;
+    }
+
+    private Integer getNotDuplicatedNumber(List<Integer> numbers) {
+        Integer randomNumber = Randoms.pickNumberInRange(startIdx, endIdx);
+
+        while(numbers.contains(randomNumber)) {
+            randomNumber = Randoms.pickNumberInRange(startIdx, endIdx);
+        }
+
+        return randomNumber;
     }
 
     /**
