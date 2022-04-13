@@ -22,4 +22,13 @@ class NumberTest {
         assertDoesNotThrow(() -> Number.of(9));
     }
 
+    @Test
+    void 인스턴스_초기화에_사용한_숫자가_같다면_동등한_객체이다() {
+        Number left = Number.of(1);
+        Number right = Number.of(1);
+
+        assertTrue(left.equals(right));
+        assertEquals(left, right);
+    }
+
 }

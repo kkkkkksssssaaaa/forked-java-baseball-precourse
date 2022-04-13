@@ -17,6 +17,24 @@ public class Number {
         return new Number(num);
     }
 
+    public int get() {
+        return this.num;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Number)) {
+            return false;
+        }
+
+        return this.get() == ((Number) object).get();
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(this.get());
+    }
+
     private void validate(int num) {
         if (num < MIN) {
             throw new IllegalArgumentException();
