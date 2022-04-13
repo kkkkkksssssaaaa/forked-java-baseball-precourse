@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NumberTest {
 
     @Test
-    void 지정된_범위의_숫자가_아니라면_Number인스턴스를_만들_수_없다() {
+    void 지정된_범위의_숫자가_아니라면_IllegalArgumentException이_던져진다() {
         assertThrows(IllegalArgumentException.class, () -> Number.of(Integer.MIN_VALUE));
         assertThrows(IllegalArgumentException.class, () -> Number.of(-1));
         assertThrows(IllegalArgumentException.class, () -> Number.of(0));
