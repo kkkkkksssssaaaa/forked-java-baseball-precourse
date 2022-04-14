@@ -1,5 +1,7 @@
 package baseball.number;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
 public class Number {
 
     private static final int MIN = 1;
@@ -15,6 +17,10 @@ public class Number {
 
     public static Number of(int num) {
         return new Number(num);
+    }
+
+    public static Number random() {
+        return Number.of(Randoms.pickNumberInRange(MIN, MAX));
     }
 
     public int get() {

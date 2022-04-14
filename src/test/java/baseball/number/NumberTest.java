@@ -31,4 +31,11 @@ class NumberTest {
         assertEquals(left, right);
     }
 
+    @Test
+    void 지정된_범위_내의_무작위_숫자로_인스턴스를_초기화할_수_있다() {
+        for (int i = 0; i < 1000; i++) {
+            assertDoesNotThrow(Number::random);
+        }
+    }
+
 }
