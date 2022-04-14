@@ -19,4 +19,11 @@ class NumbersTest {
                         Number.of(1), Number.of(2), Number.of(3), Number.of(4)));
     }
 
+    @Test
+    void 랜덤한_숫자들로_인스턴스를_초기화할_수_있다() {
+        for (int i = 0; i < 1000; i++) {
+            assertDoesNotThrow(Numbers::random);
+        }
+    }
+
 }
