@@ -11,17 +11,21 @@ public class Numbers {
     private static final int INDEX = 3;
 
     private Numbers(Number... numbers) {
-        validate(numbers);
-
         this.numbers = new LinkedHashSet<>(Arrays.asList(numbers));
+
+        validate();
     }
 
     public static Numbers of(Number... numbers) {
         return new Numbers(numbers);
     }
 
-    private void validate(Number... numbers) {
-        if (numbers.length != INDEX) {
+    public Set<Number> get() {
+        return this.numbers;
+    }
+
+    private void validate() {
+        if (this.numbers.size() != INDEX) {
             throw new IllegalArgumentException();
         }
     }
