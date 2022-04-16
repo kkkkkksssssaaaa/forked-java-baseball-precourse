@@ -33,13 +33,8 @@ public class GameController {
     }
 
     private boolean isNothing() {
-        if (!game.computerNumbers().containsAny(game.playerNumbers())) {
-            System.out.println("낫싱");
-
-            return true;
-        }
-
-        return false;
+        return !game.computerNumbers()
+                .containsAny(game.playerNumbers());
     }
 
     private boolean isFourBall() {
