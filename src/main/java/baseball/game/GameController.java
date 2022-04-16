@@ -1,5 +1,7 @@
 package baseball.game;
 
+import baseball.number.Numbers;
+
 public class GameController {
 
     private final Game game;
@@ -27,7 +29,13 @@ public class GameController {
     }
 
     private boolean isNothing() {
-        return true;
+        if (!game.computerNumbers().containsAny(game.playerNumbers())) {
+            System.out.println("낫싱");
+
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isFourBall() {
