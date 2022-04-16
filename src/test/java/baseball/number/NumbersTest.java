@@ -46,4 +46,22 @@ class NumbersTest {
         }
     }
 
+    @Test
+    void 정수를_입력받아_contain을_호출하여_해당_Number가_존재한다면_true를_반환한다() {
+        Numbers numbers = Numbers.of(1, 2, 3);
+
+        assertTrue(numbers.contain(1));
+        assertTrue(numbers.contain(2));
+        assertTrue(numbers.contain(3));
+    }
+
+    @Test
+    void 정수를_입력받아_contain을_호출하여_해당_Number가_존재하지_않는다면_false를_반환한다() {
+        Numbers numbers = Numbers.of(1, 2, 3);
+
+        assertFalse(numbers.contain(4));
+        assertFalse(numbers.contain(5));
+        assertFalse(numbers.contain(6));
+    }
+
 }

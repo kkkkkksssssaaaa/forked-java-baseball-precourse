@@ -40,6 +40,12 @@ public class Numbers {
         return this.numbers;
     }
 
+    public boolean contain(int num) {
+        Number number = Number.of(num);
+
+        return this.numbers.contains(number);
+    }
+
     private void validate(int... intArray) {
         HashSet<Number> toSet = new HashSet<>(Arrays.asList(toNumberArray(intArray)));
 
