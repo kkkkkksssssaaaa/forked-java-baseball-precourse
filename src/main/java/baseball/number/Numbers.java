@@ -50,6 +50,16 @@ public class Numbers {
         return this.numbers.contains(number);
     }
 
+    public boolean containsAny(Numbers numbers) {
+        List<Boolean> proceed = new ArrayList<>();
+
+        for (int i = 0; i < INDEX; i++) {
+            proceed.add(this.contain(numbers.get(i)));
+        }
+
+        return proceed.contains(Boolean.TRUE);
+    }
+
     public boolean containsAll(Numbers numbers) {
         return this.numbers.containsAll(numbers.numbers);
     }

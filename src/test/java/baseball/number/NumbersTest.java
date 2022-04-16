@@ -74,12 +74,30 @@ class NumbersTest {
     }
 
     @Test
-    void Numbers끼리_비교하여_한_개의_수라도_다를_경우_containsAll에서_false_를_반환한다() {
+    void Numbers끼리_비교하여_한_개의_수라도_다를_경우_containsAll에서_false를_반환한다() {
         Numbers left = Numbers.of(1, 2, 3);
 
         assertFalse(left.containsAll(Numbers.of(3, 1, 4)));
         assertFalse(left.containsAll(Numbers.of(2, 1, 5)));
         assertFalse(left.containsAll(Numbers.of(1, 5, 6)));
+    }
+
+    @Test
+    void Number가_한_개라도_존재한다면_containsAny에서_true를_반환한다() {
+        Numbers left = Numbers.of(1, 2, 3);
+
+        assertTrue(left.containsAny(Numbers.of(1, 2, 4)));
+        assertTrue(left.containsAny(Numbers.of(1, 3, 4)));
+        assertTrue(left.containsAny(Numbers.of(1, 4, 5)));
+    }
+
+    @Test
+    void Number가_한_개라도_존재하지_않는다면_containsAny에서_false를_반환한다() {
+        Numbers left = Numbers.of(1, 2, 3);
+
+        assertFalse(left.containsAny(Numbers.of(4, 5, 6)));
+        assertFalse(left.containsAny(Numbers.of(4, 7, 8)));
+        assertFalse(left.containsAny(Numbers.of(9, 8, 7)));
     }
 
 }
