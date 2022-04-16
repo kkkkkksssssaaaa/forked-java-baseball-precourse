@@ -54,15 +54,19 @@ public class GameController {
     }
 
     private boolean isStrike() {
-        for (int i = 0; i < Numbers.INDEX; i++) {
-
-        }
-
-        return true;
+        return strikeCount() > 0;
     }
 
-    private boolean isThreeStrike() {
-        return true;
+    private int strikeCount() {
+        List<Boolean> checks = new ArrayList<>();
+
+        for (int i = 0; i < Numbers.INDEX; i++) {
+            checks.add(
+                    game.computerNumbers().get(i)
+                            .equals(game.playerNumbers().get(i)));
+        }
+
+        return Collections.frequency(checks, Boolean.TRUE);
     }
 
 }
