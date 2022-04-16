@@ -1,21 +1,21 @@
 package baseball.game;
 
-import baseball.number.Numbers;
 import baseball.user.ComputerUser;
 import baseball.user.PlayerUser;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Game {
 
     private final ComputerUser computerUser;
     private final PlayerUser playerUser;
 
-    private Game(Numbers playerNumbers) {
+    private Game(String consoleInput) {
         this.computerUser = ComputerUser.init();
-        this.playerUser = PlayerUser.init(playerNumbers);
+        this.playerUser = PlayerUser.init(consoleInput);
     }
 
-    public static Game of(Numbers playerNumbers) {
-        return new Game(playerNumbers);
+    public static Game ofConsoleInput() {
+        return new Game(Console.readLine());
     }
 
 }
