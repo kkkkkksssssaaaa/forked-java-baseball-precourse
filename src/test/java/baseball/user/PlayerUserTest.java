@@ -12,7 +12,7 @@ class PlayerUserTest {
     void 세_개의_서로_다른_숫자로_인스턴스화할_수_있다() {
         assertDoesNotThrow(() ->
                 PlayerUser.init(
-                        Numbers.of(Number.of(1), Number.of(2), Number.of(3))));
+                        Numbers.of(1, 2, 3)));
     }
 
     @Test
@@ -20,17 +20,17 @@ class PlayerUserTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> PlayerUser.init(
-                        Numbers.of(Number.of(1), Number.of(2), Number.of(3), Number.of(3))));
+                        Numbers.of(1, 2, 3, 3)));
 
         assertThrows(
                 IllegalArgumentException.class,
                 () -> PlayerUser.init(
-                        Numbers.of(Number.of(1), Number.of(2), Number.of(3), Number.of(4))));
+                        Numbers.of(1, 2, 3, 4)));
 
         assertThrows(
                 IllegalArgumentException.class,
                 () -> PlayerUser.init(
-                        Numbers.of(Number.of(1), Number.of(2))));
+                        Numbers.of(1, 2)));
     }
 
 }

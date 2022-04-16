@@ -7,37 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class NumbersTest {
 
     @Test
-    void 세_개의_Number로_인스턴스를_생성할_수_있다() {
-        assertDoesNotThrow(() -> Numbers.of(
-                Number.of(1), Number.of(2), Number.of(3)));
-    }
-
-    @Test
-    void 세_개의_이상의_Number로_초기화한다면_IllegalArgumentException이_던져진다() {
-        assertThrows(IllegalArgumentException.class,
-                () -> Numbers.of(
-                        Number.of(1), Number.of(2), Number.of(3), Number.of(4)));
-    }
-
-    @Test
-    void 세_개_이하의_Number로_초기화한다면_IllegalArgumentException이_던져진다() {
-        assertThrows(IllegalArgumentException.class,
-                () -> Numbers.of(
-                        Number.of(1), Number.of(2)));
-    }
-
-    @Test
-    void 같은_Number로_초기화하면_IllegalArgumentException이_던져진다() {
-        assertThrows(IllegalArgumentException.class,
-                () -> Numbers.of(
-                        Number.of(1), Number.of(2), Number.of(2)));
-
-        assertThrows(IllegalArgumentException.class,
-                () -> Numbers.of(
-                        Number.of(1), Number.of(2), Number.of(2), Number.of(3)));
-    }
-
-    @Test
     void 길이가_3인_가변인수를_통해_인스턴스를_생성할_수_있다() {
         assertDoesNotThrow(() -> Numbers.of(1, 2, 3));
         assertDoesNotThrow(() -> Numbers.of(8, 7, 3));

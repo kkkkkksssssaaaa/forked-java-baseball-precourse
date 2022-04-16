@@ -8,12 +8,6 @@ public class Numbers {
 
     private static final int INDEX = 3;
 
-    private Numbers(Number... numbers) {
-        validate(numbers);
-
-        this.numbers = new LinkedHashSet<>(Arrays.asList(numbers));
-    }
-
     private Numbers(int... numbers) {
         validate(numbers);
 
@@ -32,10 +26,6 @@ public class Numbers {
         }
     }
 
-    public static Numbers of(Number... numbers) {
-        return new Numbers(numbers);
-    }
-
     public static Numbers of(int... intArray) {
         return new Numbers(intArray);
     }
@@ -48,26 +38,26 @@ public class Numbers {
         return this.numbers;
     }
 
-    private void validate(Number... numbers) {
-        HashSet<Number> toSet = new HashSet<>(Arrays.asList(numbers));
+    private void validate(int... intArray) {
+        HashSet<Number> toSet = new HashSet<>(Arrays.asList(toNumberArray(intArray)));
 
         if (toSet.size() != INDEX) {
             throw new IllegalArgumentException();
         }
 
-        if (numbers.length != toSet.size()) {
+        if (intArray.length != toSet.size()) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void validate(int... intArray) {
+    private Number[] toNumberArray(int... intArray) {
         Number[] toNumber = new Number[intArray.length];
 
         for (int i = 0; i < toNumber.length; i++) {
             toNumber[i] = Number.of(intArray[i]);
         }
 
-        validate(toNumber);
+        return toNumber;
     }
 
 }
