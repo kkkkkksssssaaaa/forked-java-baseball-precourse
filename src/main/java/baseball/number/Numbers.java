@@ -14,10 +14,12 @@ public class Numbers {
         this.numbers = new LinkedHashSet<>(Arrays.asList(numbers));
     }
 
-    private Numbers(Set<Number> numbers) {
-        this.numbers = numbers;
+    private Numbers() {
+        this.numbers = new LinkedHashSet<>();
 
-        validate();
+        while(this.numbers.size() != INDEX) {
+            numbers.add(Number.random());
+        }
     }
 
     public static Numbers of(Number... numbers) {
@@ -25,13 +27,7 @@ public class Numbers {
     }
 
     public static Numbers random() {
-        Set<Number> numbers = new LinkedHashSet<>();
-
-        while(numbers.size() != INDEX) {
-            numbers.add(Number.random());
-        }
-
-        return Numbers.of(numbers);
+        return new Numbers();
     }
 
     public Set<Number> get() {
