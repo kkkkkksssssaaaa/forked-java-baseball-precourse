@@ -20,7 +20,9 @@ public class Game {
     }
 
     public void run() {
-        // reInitializePlayer();
+        while (GameController.of(this).continueGame()) {
+            reInitializePlayer();
+        }
     }
 
     public ComputerUser computer() {
