@@ -3,7 +3,7 @@ package baseball.user;
 import baseball.number.Numbers;
 import baseball.util.Integers;
 
-public class PlayerUser extends AbstractUser {
+public final class PlayerUser extends AbstractUser {
 
     private PlayerUser(Numbers numbers) {
         super(numbers);

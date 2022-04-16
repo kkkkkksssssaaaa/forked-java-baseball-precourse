@@ -2,7 +2,7 @@ package baseball.user;
 
 import baseball.number.Numbers;
 
-public class ComputerUser extends AbstractUser {
+public final class ComputerUser extends AbstractUser {
 
     private ComputerUser() {
         super(Numbers.random());

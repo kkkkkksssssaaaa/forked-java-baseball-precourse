@@ -10,7 +10,7 @@ public abstract class AbstractUser {
         this.numbers = numbers;
     }
 
-    public Numbers numbers() {
+    public final Numbers numbers() {
         return this.numbers;
     }
 
