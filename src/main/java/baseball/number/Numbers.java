@@ -4,14 +4,14 @@ import java.util.*;
 
 public class Numbers {
 
-    private final Set<Number> numbers;
+    private final List<Number> numbers;
 
     private static final int INDEX = 3;
 
     private Numbers(int... numbers) {
         validate(numbers);
 
-        this.numbers = new LinkedHashSet<>();
+        this.numbers = new ArrayList<>();
 
         for (int i = 0; i < INDEX; i++) {
             this.numbers.add(Number.of(numbers[i]));
@@ -19,11 +19,13 @@ public class Numbers {
     }
 
     private Numbers() {
-        this.numbers = new LinkedHashSet<>();
+        Set<Number> toSet = new LinkedHashSet<>();
 
-        while(this.numbers.size() != INDEX) {
-            numbers.add(Number.random());
+        while(toSet.size() != INDEX) {
+            toSet.add(Number.random());
         }
+
+        this.numbers = new ArrayList<>(toSet);
     }
 
     public static Numbers of(int... intArray) {
@@ -34,7 +36,7 @@ public class Numbers {
         return new Numbers();
     }
 
-    public Set<Number> get() {
+    public List<Number> get() {
         return this.numbers;
     }
 
