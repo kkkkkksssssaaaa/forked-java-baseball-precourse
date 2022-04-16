@@ -38,15 +38,7 @@ public class GameController {
     }
 
     private boolean isFourBall() {
-        List<Boolean> checks = new ArrayList<>();
-
-        for (int i = 0; i < Numbers.INDEX; i++) {
-            checks.add(
-                    game.computerNumbers().get(i)
-                            .equals(game.playerNumbers().get(i)));
-        }
-
-        return !checks.contains(Boolean.TRUE);
+        return ballCount() == Numbers.INDEX;
     }
 
     private boolean isBall() {
@@ -71,7 +63,7 @@ public class GameController {
     }
 
     private boolean isThreeStrike() {
-        return true;
+        return strikeCount() == Numbers.INDEX;
     }
 
     private boolean isStrike() {
