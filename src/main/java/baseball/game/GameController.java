@@ -16,7 +16,7 @@ public class GameController {
         return !Hint.THREE_STRIKE.equals(hint());
     }
 
-    private Hint hint() {
+    public Hint hint() {
         if (isNothing()) return Hint.NOTHING;
         if (isFourBall()) return Hint.FOUR_BALL;
         if (isBall()) return Hint.BALL;
