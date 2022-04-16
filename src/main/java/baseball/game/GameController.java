@@ -2,7 +2,6 @@ package baseball.game;
 
 import baseball.number.Numbers;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,12 +22,35 @@ public class GameController {
         return !Hint.THREE_STRIKE.equals(hint());
     }
 
+    // TODO 콘솔 출력 viewer 에서 제어
     public Hint hint() {
-        if (isNothing()) return Hint.NOTHING;
-        if (isFourBall()) return Hint.FOUR_BALL;
-        if (isBall()) return Hint.BALL;
-        if (isStrike()) return Hint.STRIKE;
-        if (isThreeStrike()) return Hint.THREE_STRIKE;
+        if (isThreeStrike()) {
+            System.out.println("3스트라이크");
+            return Hint.THREE_STRIKE;
+        }
+        if (isNothing()) {
+            System.out.println("낫싱");
+            return Hint.NOTHING;
+        }
+        if (isFourBall()) {
+            System.out.println("포볼");
+            return Hint.FOUR_BALL;
+        }
+        if (isBallAndStrike()) {
+            String formattedString = String.format("%d볼 %d스트라이크", ballCount(), strikeCount());
+            System.out.println(formattedString);
+            return Hint.BALL_AND_STRIKE;
+        }
+        if (isStrike()) {
+            String formattedString = String.format("%d스트라이크", strikeCount());
+            System.out.println(formattedString);
+            return Hint.STRIKE;
+        }
+        if (isBall()) {
+            String formattedString = String.format("%d볼", ballCount());
+            System.out.println(formattedString);
+            return Hint.BALL;
+        }
 
         throw new IllegalArgumentException();
     }
