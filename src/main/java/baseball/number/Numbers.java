@@ -14,6 +14,16 @@ public class Numbers {
         this.numbers = new LinkedHashSet<>(Arrays.asList(numbers));
     }
 
+    private Numbers(int... numbers) {
+        validate(numbers);
+
+        this.numbers = new LinkedHashSet<>();
+
+        for (int i = 0; i < INDEX; i++) {
+            this.numbers.add(Number.of(numbers[i]));
+        }
+    }
+
     private Numbers() {
         this.numbers = new LinkedHashSet<>();
 
@@ -24,6 +34,10 @@ public class Numbers {
 
     public static Numbers of(Number... numbers) {
         return new Numbers(numbers);
+    }
+
+    public static Numbers of(int... intArray) {
+        return new Numbers(intArray);
     }
 
     public static Numbers random() {
@@ -44,6 +58,16 @@ public class Numbers {
         if (numbers.length != toSet.size()) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private void validate(int... intArray) {
+        Number[] toNumber = new Number[intArray.length];
+
+        for (int i = 0; i < toNumber.length; i++) {
+            toNumber[i] = Number.of(intArray[i]);
+        }
+
+        validate(toNumber);
     }
 
 }
