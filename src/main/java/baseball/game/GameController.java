@@ -2,6 +2,10 @@ package baseball.game;
 
 import baseball.number.Numbers;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameController {
 
     private final Game game;
@@ -39,7 +43,15 @@ public class GameController {
     }
 
     private boolean isFourBall() {
-        return true;
+        List<Boolean> checks = new ArrayList<>();
+
+        for (int i = 0; i < Numbers.INDEX; i++) {
+            checks.add(
+                    game.computerNumbers().get(i)
+                            .equals(game.playerNumbers().get(i)));
+        }
+
+        return !checks.contains(Boolean.TRUE);
     }
 
     private boolean isBall() {
@@ -47,6 +59,10 @@ public class GameController {
     }
 
     private boolean isStrike() {
+        for (int i = 0; i < Numbers.INDEX; i++) {
+
+        }
+
         return true;
     }
 
