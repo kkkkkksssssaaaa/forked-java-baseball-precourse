@@ -13,10 +13,28 @@ class NumbersTest {
     }
 
     @Test
-    void 세_개의_이상의_Number로_초기화한다면_IllegalArgumentException을_던져진다() {
+    void 세_개의_이상의_Number로_초기화한다면_IllegalArgumentException이_던져진다() {
         assertThrows(IllegalArgumentException.class,
                 () -> Numbers.of(
                         Number.of(1), Number.of(2), Number.of(3), Number.of(4)));
+    }
+
+    @Test
+    void 세_개_이하의_Number로_초기화한다면_IllegalArgumentException이_던져진다() {
+        assertThrows(IllegalArgumentException.class,
+                () -> Numbers.of(
+                        Number.of(1), Number.of(2)));
+    }
+
+    @Test
+    void 같은_Number로_초기화하면_IllegalArgumentException이_던져진다() {
+        assertThrows(IllegalArgumentException.class,
+                () -> Numbers.of(
+                        Number.of(1), Number.of(2), Number.of(2)));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Numbers.of(
+                        Number.of(1), Number.of(2), Number.of(2), Number.of(3)));
     }
 
     @Test

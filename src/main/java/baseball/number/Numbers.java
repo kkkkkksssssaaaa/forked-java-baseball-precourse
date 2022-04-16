@@ -9,9 +9,9 @@ public class Numbers {
     private static final int INDEX = 3;
 
     private Numbers(Number... numbers) {
-        this.numbers = new LinkedHashSet<>(Arrays.asList(numbers));
+        validate(numbers);
 
-        validate();
+        this.numbers = new LinkedHashSet<>(Arrays.asList(numbers));
     }
 
     private Numbers(Set<Number> numbers) {
@@ -21,10 +21,6 @@ public class Numbers {
     }
 
     public static Numbers of(Number... numbers) {
-        return new Numbers(numbers);
-    }
-
-    public static Numbers of(Set<Number> numbers) {
         return new Numbers(numbers);
     }
 
@@ -42,8 +38,14 @@ public class Numbers {
         return this.numbers;
     }
 
-    private void validate() {
-        if (this.numbers.size() != INDEX) {
+    private void validate(Number... numbers) {
+        HashSet<Number> toSet = new HashSet<>(Arrays.asList(numbers));
+
+        if (toSet.size() != INDEX) {
+            throw new IllegalArgumentException();
+        }
+
+        if (numbers.length != toSet.size()) {
             throw new IllegalArgumentException();
         }
     }
