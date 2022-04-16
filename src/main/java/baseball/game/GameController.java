@@ -4,6 +4,7 @@ import baseball.number.Numbers;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameController {
@@ -39,6 +40,10 @@ public class GameController {
 
     private boolean isFourBall() {
         return ballCount() == Numbers.INDEX;
+    }
+
+    private boolean isBallAndStrike() {
+        return isBall() && isStrike();
     }
 
     private boolean isBall() {
