@@ -13,20 +13,37 @@ public class GameController {
     }
 
     public boolean continueGame() {
-        return !Hints.THREE_STRIKE.equals(hint());
+        return !Hint.THREE_STRIKE.equals(hint());
     }
 
-    private Hints hint() {
-        return Hints.THREE_STRIKE;
+    private Hint hint() {
+        if (isNothing()) return Hint.NOTHING;
+        if (isFourBall()) return Hint.FOUR_BALL;
+        if (isBall()) return Hint.BALL;
+        if (isStrike()) return Hint.STRIKE;
+        if (isThreeStrike()) return Hint.THREE_STRIKE;
+
+        throw new IllegalArgumentException();
     }
 
-    enum Hints {
-        BALL,
-        STRIKE,
-        FOUR_BALL,
-        NOTHING,
-        THREE_STRIKE
-        ;
+    private boolean isNothing() {
+        return true;
+    }
+
+    private boolean isFourBall() {
+        return true;
+    }
+
+    private boolean isBall() {
+        return true;
+    }
+
+    private boolean isStrike() {
+        return true;
+    }
+
+    private boolean isThreeStrike() {
+        return true;
     }
 
 }
