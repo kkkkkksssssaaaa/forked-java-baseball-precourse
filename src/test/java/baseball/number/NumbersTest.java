@@ -64,4 +64,22 @@ class NumbersTest {
         assertFalse(numbers.contain(6));
     }
 
+    @Test
+    void Numbers끼리_비교하여_모든_수를_포함하고_있는지_여부를_알_수_있다() {
+        Numbers left = Numbers.of(1, 2, 3);
+
+        assertTrue(left.containsAll(Numbers.of(3, 1, 2)));
+        assertTrue(left.containsAll(Numbers.of(2, 1, 3)));
+        assertTrue(left.containsAll(Numbers.of(1, 2, 3)));
+    }
+
+    @Test
+    void Numbers끼리_비교하여_한_개의_수라도_다를_경우_containsAll에서_false_를_반환한다() {
+        Numbers left = Numbers.of(1, 2, 3);
+
+        assertFalse(left.containsAll(Numbers.of(3, 1, 4)));
+        assertFalse(left.containsAll(Numbers.of(2, 1, 5)));
+        assertFalse(left.containsAll(Numbers.of(1, 5, 6)));
+    }
+
 }

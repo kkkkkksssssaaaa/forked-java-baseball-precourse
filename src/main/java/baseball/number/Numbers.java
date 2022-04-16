@@ -6,7 +6,7 @@ public class Numbers {
 
     private final List<Number> numbers;
 
-    private static final int INDEX = 3;
+    public static final int INDEX = 3;
 
     private Numbers(int... numbers) {
         validate(numbers);
@@ -36,14 +36,22 @@ public class Numbers {
         return new Numbers();
     }
 
-    public List<Number> get() {
-        return this.numbers;
+    public Number get(int idx) {
+        return this.numbers.get(idx);
     }
 
-    public boolean contain(int num) {
-        Number number = Number.of(num);
+    public boolean contain(int integer) {
+        Number number = Number.of(integer);
 
+        return contain(number);
+    }
+
+    public boolean contain(Number number) {
         return this.numbers.contains(number);
+    }
+
+    public boolean containsAll(Numbers numbers) {
+        return this.numbers.containsAll(numbers.numbers);
     }
 
     private void validate(int... intArray) {
