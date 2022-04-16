@@ -13,9 +13,6 @@ public class Application {
 
         String consoleInput = Console.readLine();
 
-        Numbers playerNumbers = Numbers.of(
-                Integers.toIntArray(consoleInput));
-
-        PlayerUser player = PlayerUser.init(playerNumbers);
+        PlayerUser player = PlayerUser.init(consoleInput);
     }
 }

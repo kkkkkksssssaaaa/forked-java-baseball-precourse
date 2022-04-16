@@ -1,6 +1,7 @@
 package baseball.user;
 
 import baseball.number.Numbers;
+import baseball.util.Integers;
 
 public class PlayerUser extends AbstractUser {
 
@@ -8,7 +9,10 @@ public class PlayerUser extends AbstractUser {
         super(numbers);
     }
 
-    public static PlayerUser init(Numbers numbers) {
+    public static PlayerUser init(String consoleInput) {
+        Numbers numbers = Numbers.of(
+                Integers.toIntArray(consoleInput));
+
         return new PlayerUser(numbers);
     }
 
