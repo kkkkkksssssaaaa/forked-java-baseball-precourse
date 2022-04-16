@@ -50,6 +50,27 @@ public class GameController {
     }
 
     private boolean isBall() {
+        return ballCount() > 0;
+    }
+
+    private int ballCount() {
+        List<Boolean> checks = new ArrayList<>();
+
+        for (int i = 0; i < Numbers.INDEX; i++) {
+            checks.add(containAndNotEquals(i));
+        }
+
+        return Collections.frequency(checks, Boolean.TRUE);
+    }
+
+    private boolean containAndNotEquals(int idx) {
+        return game.computerNumbers()
+                .contain(game.playerNumbers().get(idx))
+                && !game.computerNumbers().get(idx)
+                .equals(game.playerNumbers().get(idx));
+    }
+
+    private boolean isThreeStrike() {
         return true;
     }
 
