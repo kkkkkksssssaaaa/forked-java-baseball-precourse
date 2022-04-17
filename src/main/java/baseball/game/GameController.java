@@ -12,13 +12,13 @@ public class GameController {
     }
 
     public static GameController newGame() {
+        GameViewer.printRun();
         return new GameController();
     }
 
     public void run() {
-        GameViewer.printRun();
-
         while (running()) {
+            GameViewer.printRun();
             game.reInitializePlayer();
         }
 
