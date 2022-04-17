@@ -1,6 +1,7 @@
 package baseball.game;
 
 import baseball.number.Numbers;
+import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,25 +9,35 @@ import java.util.List;
 
 public class GameController {
 
-    private final Game game;
+    private Game game;
 
-    private GameController(Game game) {
-        this.game = game;
+    private GameController() {
+        this.game = createNewGame();
     }
 
     public static GameController newGame() {
-        return new GameController(
-                Game.ofConsoleInput());
+        return new GameController();
     }
 
     public void run() {
-        while (continueGame()) {
+        while (running()) {
             game.reInitializePlayer();
         }
+
+        isReStart();
     }
 
-    public boolean continueGame() {
+    public boolean running() {
         return !Hint.THREE_STRIKE.equals(hint());
+    }
+
+    private void isReStart() {
+        Running.Status status = Running.fromCode(Console.readLine());
+
+        if (status.equals(Running.Status.RE_START)) {
+            this.game = createNewGame();
+            run();
+        }
     }
 
     // TODO 콘솔 출력 viewer 에서 제어
@@ -60,6 +71,10 @@ public class GameController {
         }
 
         throw new IllegalArgumentException();
+    }
+
+    private Game createNewGame() {
+        return Game.ofConsoleInput();
     }
 
     private boolean isNothing() {
