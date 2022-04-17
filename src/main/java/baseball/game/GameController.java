@@ -12,7 +12,7 @@ public class GameController {
     private Game game;
 
     private GameController() {
-        this.game = createNewGame();
+        createNewGame();
     }
 
     public static GameController newGame() {
@@ -20,6 +20,8 @@ public class GameController {
     }
 
     public void run() {
+        GameViewer.printRun();
+
         while (running()) {
             game.reInitializePlayer();
         }
@@ -27,71 +29,76 @@ public class GameController {
         isReStart();
     }
 
-    public boolean running() {
-        return !Hint.THREE_STRIKE.equals(hint());
-    }
-
     private void isReStart() {
+        GameViewer.printIsReStart();
+
         Running.Status status = Running.fromCode(Console.readLine());
 
         if (status.equals(Running.Status.RE_START)) {
-            this.game = createNewGame();
+            createNewGame();
             run();
         }
     }
 
-    // TODO 콘솔 출력 viewer 에서 제어
-    public Hint hint() {
-        if (isThreeStrike()) {
-            System.out.println("3스트라이크");
-            return Hint.THREE_STRIKE;
-        }
-        if (isNothing()) {
-            System.out.println("낫싱");
-            return Hint.NOTHING;
-        }
-        if (isFourBall()) {
-            System.out.println("포볼");
-            return Hint.FOUR_BALL;
-        }
-        if (isBallAndStrike()) {
-            String formattedString = String.format("%d볼 %d스트라이크", ballCount(), strikeCount());
-            System.out.println(formattedString);
-            return Hint.BALL_AND_STRIKE;
-        }
-        if (isStrike()) {
-            String formattedString = String.format("%d스트라이크", strikeCount());
-            System.out.println(formattedString);
-            return Hint.STRIKE;
-        }
-        if (isBall()) {
-            String formattedString = String.format("%d볼", ballCount());
-            System.out.println(formattedString);
-            return Hint.BALL;
-        }
+    private void createNewGame() {
+        this.game = Game.ofConsoleInput();
+    }
+
+    // TODO 힌트 부분 클래스 분리
+    private Hint hint() {
+        if (isThreeStrike()) return Hint.THREE_STRIKE;
+        if (isNothing()) return Hint.NOTHING;
+        if (isFourBall()) return Hint.FOUR_BALL;
+        if (isBallAndStrike()) return Hint.BALL_AND_STRIKE;
+        if (isStrike()) return Hint.STRIKE;
+        if (isBall()) return Hint.BALL;
 
         throw new IllegalArgumentException();
     }
 
-    private Game createNewGame() {
-        return Game.ofConsoleInput();
+    private boolean running() {
+        return !Hint.THREE_STRIKE.equals(hint());
     }
 
     private boolean isNothing() {
-        return !game.computerNumbers()
-                .containsAny(game.playerNumbers());
+        if (!game.computerNumbers()
+                .containsAny(game.playerNumbers())) {
+            GameViewer.printNothing();
+
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isFourBall() {
-        return ballCount() == Numbers.INDEX;
+        if (ballCount() == Numbers.INDEX) {
+            GameViewer.printFourBall();
+
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isBallAndStrike() {
-        return isBall() && isStrike();
+        if (isBall() && isStrike()) {
+            GameViewer.printBallAndStrike(ballCount(), strikeCount());
+
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isBall() {
-        return ballCount() > 0;
+        if (ballCount() > 0) {
+            GameViewer.printBall(ballCount());
+
+            return true;
+        }
+
+        return false;
     }
 
     private int ballCount() {
@@ -112,11 +119,24 @@ public class GameController {
     }
 
     private boolean isThreeStrike() {
-        return strikeCount() == Numbers.INDEX;
+        if (strikeCount() == Numbers.INDEX) {
+            GameViewer.printThreeStrike();
+            GameViewer.printGameEnd();
+
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isStrike() {
-        return strikeCount() > 0;
+        if (strikeCount() > 0) {
+            GameViewer.printStrike(strikeCount());
+
+            return true;
+        }
+
+        return false;
     }
 
     private int strikeCount() {
