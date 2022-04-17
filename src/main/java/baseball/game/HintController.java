@@ -52,7 +52,7 @@ public class HintController {
     }
 
     private boolean isBallAndStrike() {
-        if (isBall() && isStrike()) {
+        if (ballCount() > 0 && strikeCount() > 0) {
             GameViewer.printBallAndStrike(ballCount(), strikeCount());
 
             return true;
