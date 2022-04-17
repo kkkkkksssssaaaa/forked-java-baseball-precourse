@@ -14,8 +14,15 @@ public class GameController {
         this.game = game;
     }
 
-    public static GameController of(Game game) {
-        return new GameController(game);
+    public static GameController newGame() {
+        return new GameController(
+                Game.ofConsoleInput());
+    }
+
+    public void run() {
+        while (continueGame()) {
+            game.reInitializePlayer();
+        }
     }
 
     public boolean continueGame() {
