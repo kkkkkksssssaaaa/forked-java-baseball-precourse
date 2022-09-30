@@ -41,4 +41,19 @@ class NumberTest {
             assertThrows(IllegalArgumentException.class, () -> Number.of(Number.max() + 1));
         }
     }
+
+    @Nested
+    @DisplayName("equals")
+    class EqualsTest {
+
+        @Test
+        void 동일한_숫자로_초기화한_객체와는_동등하다() {
+            assertEquals(Number.of(1), Number.of(1));
+        }
+
+        @Test
+        void 다른_숫자로_초기화한_객체와는_동등하지_않다() {
+            assertNotEquals(Number.of(1), Number.of(2));
+        }
+    }
 }
