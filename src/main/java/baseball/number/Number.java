@@ -35,7 +35,7 @@ public class Number {
         CheckNull.one(object);
 
         if (object.getClass().equals(Number.class)) {
-            return this.getPrimitive() == ((Number) object).getPrimitive();
+            return this.hashCode() == object.hashCode();
         }
 
         return false;
