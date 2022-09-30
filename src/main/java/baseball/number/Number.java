@@ -34,10 +34,6 @@ public class Number {
     public boolean equals(Object object) {
         CheckNull.one(object);
 
-        if (object.getClass().equals(Integer.class)) {
-            return object.equals(this.getPrimitive());
-        }
-
         if (object.getClass().equals(Number.class)) {
             return this.getPrimitive() == ((Number) object).getPrimitive();
         }
