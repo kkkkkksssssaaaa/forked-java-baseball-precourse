@@ -52,4 +52,25 @@ class NumbersTest {
             assertThrows(IllegalArgumentException.class, () -> Numbers.of(numbers));
         }
     }
+
+    @Nested
+    @DisplayName("equals")
+    class EqualsTest {
+
+        @Test
+        void 같은_Number들로_초기화하면_동등하다() {
+            Numbers compareLeft = Numbers.of(Number.of(1), Number.of(2), Number.of(3));
+            Numbers compareRight = Numbers.of(Number.of(1), Number.of(2), Number.of(3));
+
+            assertEquals(compareLeft, compareRight);
+        }
+
+        @Test
+        void 다른_Number들로_초기화하면_동등하지_않다() {
+            Numbers compareLeft = Numbers.of(Number.of(1), Number.of(2), Number.of(3));
+            Numbers compareRight = Numbers.of(Number.of(1), Number.of(2), Number.of(4));
+
+            assertNotEquals(compareLeft, compareRight);
+        }
+    }
 }
